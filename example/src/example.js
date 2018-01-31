@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import BurgerMenu from 'react-burger-menu';
+import BurgerMenu from 'light-react-burger-menu';
 import classNames from 'classnames';
 
 class MenuWrap extends Component {

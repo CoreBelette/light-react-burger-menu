@@ -1,11 +1,11 @@
 {
-  "name": "react-burger-menu",
-  "version": "2.2.3",
-  "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
-  "main": "dist/react-burger-menu.min.js",
-  "homepage": "https://github.com/negomi/react-burger-menu",
+  "name": "light-react-burger-menu",
+  "version": "0.0.1",
+  "description": "A lightweight version of https://github.com/negomi/react-burger-menu ",
+  "main": "dist/light-react-burger-menu.min.js",
+  "homepage": "https://github.com/CoreBelette/light-react-burger-menu",
   "authors": [
-    "Imogen Wentworth"
+    "Core Belette"
   ],
   "moduleType": [
     "amd",
