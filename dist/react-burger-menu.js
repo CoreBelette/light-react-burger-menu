@@ -153,98 +153,6 @@ if ("production" !== 'production') {
 
 module.exports = warning;
 },{"./emptyFunction":1}],4:[function(require,module,exports){
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-'use strict';
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],5:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -305,7 +213,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":9,"fbjs/lib/invariant":2,"fbjs/lib/warning":3}],6:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":8,"fbjs/lib/invariant":2,"fbjs/lib/warning":3}],5:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -365,7 +273,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":9,"fbjs/lib/emptyFunction":1,"fbjs/lib/invariant":2}],7:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":8,"fbjs/lib/emptyFunction":1,"fbjs/lib/invariant":2}],6:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -909,7 +817,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-},{"./checkPropTypes":5,"./lib/ReactPropTypesSecret":9,"fbjs/lib/emptyFunction":1,"fbjs/lib/invariant":2,"fbjs/lib/warning":3,"object-assign":4}],8:[function(require,module,exports){
+},{"./checkPropTypes":4,"./lib/ReactPropTypesSecret":8,"fbjs/lib/emptyFunction":1,"fbjs/lib/invariant":2,"fbjs/lib/warning":3,"object-assign":9}],7:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -939,7 +847,7 @@ if ("production" !== 'production') {
   module.exports = require('./factoryWithThrowingShims')();
 }
 
-},{"./factoryWithThrowingShims":6,"./factoryWithTypeCheckers":7}],9:[function(require,module,exports){
+},{"./factoryWithThrowingShims":5,"./factoryWithTypeCheckers":6}],8:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -952,6 +860,98 @@ if ("production" !== 'production') {
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
+
+},{}],9:[function(require,module,exports){
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
 
 },{}],10:[function(require,module,exports){
 (function (global){
@@ -1138,23 +1138,12 @@ BurgerIcon.defaultProps = {
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"prop-types":8}],11:[function(require,module,exports){
+},{"prop-types":7}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-exports['default'] = {
-    slide: require('./menus/slide'),
-    stack: require('./menus/stack'),
-    elastic: require('./menus/elastic'),
-    bubble: require('./menus/bubble'),
-    push: require('./menus/push'),
-    pushRotate: require('./menus/pushRotate'),
-    scaleDown: require('./menus/scaleDown'),
-    scaleRotate: require('./menus/scaleRotate'),
-    fallDown: require('./menus/fallDown'),
-    reveal: require('./menus/reveal')
-};
+exports['default'] = { slide: require('./menus/slide') };
 module.exports = exports['default'];
-},{"./menus/bubble":15,"./menus/elastic":16,"./menus/fallDown":17,"./menus/push":18,"./menus/pushRotate":19,"./menus/reveal":20,"./menus/scaleDown":21,"./menus/scaleRotate":22,"./menus/slide":23,"./menus/stack":24}],12:[function(require,module,exports){
+},{"./menus/slide":15}],12:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -1343,7 +1332,7 @@ CrossIcon.defaultProps = {
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"prop-types":8}],13:[function(require,module,exports){
+},{"prop-types":7}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var styles = {
@@ -1787,394 +1776,7 @@ exports['default'] = function (styles) {
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./BurgerIcon":10,"./CrossIcon":12,"./baseStyles":13,"prop-types":8}],15:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _snapsvgImporter = require('../snapsvgImporter');
-var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        svg: {
-            lib: _snapsvgImporter2['default'],
-            pathInitial: 'M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z',
-            pathOpen: 'M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z',
-            animate: function animate(path) {
-                var pos = 0;
-                var steps = this.pathOpen.split(';');
-                var stepsTotal = steps.length;
-                var mina = window.mina;
-                var nextStep = function nextStep() {
-                    if (pos > stepsTotal - 1)
-                        return;
-                    path.animate({ path: steps[pos] }, pos === 0 ? 400 : 500, pos === 0 ? mina.easein : mina.elastic, function () {
-                        nextStep();
-                    });
-                    pos++;
-                };
-                nextStep();
-            }
-        },
-        morphShape: function morphShape(isOpen, width, right) {
-            return {
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                right: right ? 'inherit' : 0,
-                left: right ? 0 : 'inherit',
-                MozTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                MsTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                OTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                WebkitTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
-            };
-        },
-        menuWrap: function menuWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
-            };
-        },
-        menu: function menu(isOpen, width, right) {
-            width -= 140;
-            return {
-                position: 'fixed',
-                MozTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
-                opacity: isOpen ? 1 : 0
-            };
-        },
-        item: function item(isOpen, width, right, nthChild) {
-            width -= 140;
-            return {
-                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
-                opacity: isOpen ? 1 : 0
-            };
-        },
-        closeButton: function closeButton(isOpen, width, right) {
-            width -= 140;
-            return {
-                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
-                opacity: isOpen ? 1 : 0
-            };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14,"../snapsvgImporter":25}],16:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _snapsvgImporter = require('../snapsvgImporter');
-var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        svg: {
-            lib: _snapsvgImporter2['default'],
-            pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
-            pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
-            animate: function animate(path) {
-                path.animate({ path: this.pathOpen }, 400, window.mina.easeinout);
-            }
-        },
-        morphShape: function morphShape(isOpen, width, right) {
-            return {
-                position: 'absolute',
-                width: 120,
-                height: '100%',
-                right: right ? 'inherit' : 0,
-                left: right ? 0 : 'inherit',
-                MozTransform: right ? 'rotateY(180deg)' : '',
-                MsTransform: right ? 'rotateY(180deg)' : '',
-                OTransform: right ? 'rotateY(180deg)' : '',
-                WebkitTransform: right ? 'rotateY(180deg)' : '',
-                transform: right ? 'rotateY(180deg)' : ''
-            };
-        },
-        menuWrap: function menuWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                transition: 'all 0.3s'
-            };
-        },
-        menu: function menu(isOpen, width, right) {
-            return {
-                position: 'fixed',
-                right: right ? 0 : 'inherit',
-                width: 180,
-                whiteSpace: 'nowrap',
-                boxSizing: 'border-box',
-                overflow: 'visible'
-            };
-        },
-        itemList: function itemList(isOpen, width, right) {
-            if (right) {
-                return {
-                    position: 'relative',
-                    left: '-110px',
-                    width: '170%',
-                    overflow: 'auto'
-                };
-            }
-        },
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-                transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return { overflow: isOpen ? '' : 'hidden' };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14,"../snapsvgImporter":25}],17:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        menuWrap: function menuWrap(isOpen) {
-            return {
-                MozTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
-                MsTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
-                OTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
-                WebkitTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
-                transform: isOpen ? '' : 'translate3d(0, -100%, 0)',
-                transition: 'all 0.5s ease-in-out'
-            };
-        },
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transition: 'all 0.5s'
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return {
-                perspective: '1500px',
-                perspectiveOrigin: '0% 50%',
-                overflow: isOpen ? '' : 'hidden'
-            };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],18:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transition: 'all 0.5s'
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return { overflow: isOpen ? '' : 'hidden' };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],19:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0) rotateY(15deg)' : 'translate3d(' + width + ', 0, 0) rotateY(-15deg)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0) rotateY(15deg)' : 'translate3d(' + width + ', 0, 0) rotateY(-15deg)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0) rotateY(15deg)' : 'translate3d(' + width + ', 0, 0) rotateY(-15deg)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0) rotateY(15deg)' : 'translate3d(' + width + ', 0, 0) rotateY(-15deg)',
-                transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0) rotateY(15deg)' : 'translate3d(' + width + ', 0, 0) rotateY(-15deg)',
-                transformOrigin: right ? '100% 50%' : '0% 50%',
-                transformStyle: 'preserve-3d',
-                transition: 'all 0.5s'
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return {
-                perspective: '1500px',
-                overflow: isOpen ? '' : 'hidden'
-            };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],20:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        menuWrap: function menuWrap(isOpen, width, right) {
-            return {
-                visibility: isOpen ? 'visible' : 'hidden',
-                MozTransform: 'translate3d(0, 0, 0)',
-                MsTransform: 'translate3d(0, 0, 0)',
-                OTransform: 'translate3d(0, 0, 0)',
-                WebkitTransform: 'translate3d(0, 0, 0)',
-                transform: 'translate3d(0, 0, 0)',
-                zIndex: 1000
-            };
-        },
-        overlay: function overlay(isOpen, width, right) {
-            return {
-                zIndex: 1400,
-                MozTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                MsTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                OTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                WebkitTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                transform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                transition: 'all 0.5s',
-                visibility: isOpen ? 'visible' : 'hidden'
-            };
-        },
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
-                transition: 'all 0.5s',
-                zIndex: 1200,
-                position: 'relative'
-            };
-        },
-        burgerIcon: function burgerIcon(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                MsTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                OTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                WebkitTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                transform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
-                transition: 'all 0.1s',
-                position: 'relative',
-                zIndex: 1300
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return { overflow: isOpen ? '' : 'hidden' };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],21:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        pageWrap: function pageWrap(isOpen, width) {
-            return {
-                MozTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
-                MsTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
-                OTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
-                WebkitTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
-                transform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
-                transformOrigin: '100%',
-                transformStyle: 'preserve-3d',
-                transition: 'all 0.5s'
-            };
-        },
-        outerContainer: function outerContainer() {
-            return { perspective: '1500px' };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],22:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        pageWrap: function pageWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-                OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-                transform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-                transformStyle: 'preserve-3d',
-                transition: 'all 0.5s',
-                overflow: isOpen ? '' : 'hidden'
-            };
-        },
-        outerContainer: function outerContainer(isOpen) {
-            return {
-                perspective: '1500px',
-                overflow: isOpen ? '' : 'hidden'
-            };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],23:[function(require,module,exports){
+},{"./BurgerIcon":10,"./CrossIcon":12,"./baseStyles":13,"prop-types":7}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2185,49 +1787,5 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {};
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],24:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { 'default': obj };
-}
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var styles = {
-        menuWrap: function menuWrap(isOpen, width, right) {
-            return {
-                MozTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                MsTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                OTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                WebkitTransform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transform: isOpen ? '' : right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)',
-                transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
-            };
-        },
-        item: function item(isOpen, width, right, nthChild) {
-            return {
-                MozTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-                MsTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-                OTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-                WebkitTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-                transform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-                transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)'
-            };
-        }
-    };
-exports['default'] = (0, _menuFactory2['default'])(styles);
-module.exports = exports['default'];
-},{"../menuFactory":14}],25:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-exports['default'] = function () {
-    var Snap = undefined;
-    try {
-        Snap = require('snapsvg-cjs');
-    } finally {
-        return Snap;
-    }
-};
-module.exports = exports['default'];
-},{"snapsvg-cjs":undefined}]},{},[11])(11)
+},{"../menuFactory":14}]},{},[11])(11)
 });
