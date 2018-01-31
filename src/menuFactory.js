@@ -207,6 +207,7 @@ export default styles => {
             id={this.props.id}
             className={`bm-menu-wrap ${this.props.className}`.trim()}
             style={this.getStyles('menuWrap')}
+            aria-hidden={this.state.isOpen ? 'false' : 'true'}
           >
             {styles.svg && (
               <div
