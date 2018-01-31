@@ -78,8 +78,8 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 var _reactDom2 = _interopRequireDefault(_reactDom);
-var _reactBurgerMenu = require('react-burger-menu');
-var _reactBurgerMenu2 = _interopRequireDefault(_reactBurgerMenu);
+var _lightReactBurgerMenu = require('light-react-burger-menu');
+var _lightReactBurgerMenu2 = _interopRequireDefault(_lightReactBurgerMenu);
 var _classnames = require('classnames');
 var _classnames2 = _interopRequireDefault(_classnames);
 var MenuWrap = function (_Component) {
@@ -240,7 +240,7 @@ var Demo = function (_Component2) {
             {
                 key: 'getMenu',
                 value: function getMenu() {
-                    var Menu = _reactBurgerMenu2['default'][this.state.currentMenu];
+                    var Menu = _lightReactBurgerMenu2['default'][this.state.currentMenu];
                     var items = this.getItems();
                     var jsx = undefined;
                     if (this.state.side === 'right') {
@@ -340,4 +340,4 @@ var menus = {
         }
     };
 _reactDom2['default'].render(_react2['default'].createElement(Demo, { menus: menus }), document.getElementById('app'));
-},{"classnames":undefined,"react":undefined,"react-burger-menu":undefined,"react-dom":undefined}]},{},[1]);
+},{"classnames":undefined,"light-react-burger-menu":undefined,"react":undefined,"react-dom":undefined}]},{},[1]);
