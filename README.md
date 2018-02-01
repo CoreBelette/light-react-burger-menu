@@ -1,7 +1,7 @@
 light-react-burger-menu
 =================
 
-It's lighter than react-burger-menu, by only including the necessary style(slide for now)
+It's lighter than react-burger-menu, by only including the necessary style(slide for now). The minified version goes from 38kb(react-burger-menu v2.2.0) to 24kb(light-react-burger-menu 0.3.0). Good if you want to save as much as possible.
 
 It supports screen readers.
 
