@@ -1849,7 +1849,15 @@ exports['default'] = function (styles) {
                     key: 'render',
                     value: function render() {
                         var _this3 = this;
-                        return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
+                        return _react2['default'].createElement('div', null, this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
+                            onClick: function () {
+                                return _this3.toggleMenu();
+                            },
+                            styles: this.props.styles,
+                            customIcon: this.props.customBurgerIcon,
+                            className: this.props.burgerButtonClassName,
+                            barClassName: this.props.burgerBarClassName
+                        })), !this.props.noOverlay && _react2['default'].createElement('div', {
                             className: ('bm-overlay ' + this.props.overlayClassName).trim(),
                             onClick: function () {
                                 return !_this3.shouldDisableOverlayClick() && _this3.toggleMenu();
@@ -1858,7 +1866,8 @@ exports['default'] = function (styles) {
                         }), _react2['default'].createElement('div', {
                             id: this.props.id,
                             className: ('bm-menu-wrap ' + this.props.className).trim(),
-                            style: this.getStyles('menuWrap')
+                            style: this.getStyles('menuWrap'),
+                            'aria-hidden': this.state.isOpen ? 'false' : 'true'
                         }, styles.svg && _react2['default'].createElement('div', {
                             className: ('bm-morph-shape ' + this.props.morphShapeClassName).trim(),
                             style: this.getStyles('morphShape')
@@ -1889,15 +1898,7 @@ exports['default'] = function (styles) {
                             customIcon: this.props.customCrossIcon,
                             className: this.props.crossButtonClassName,
                             crossClassName: this.props.crossClassName
-                        }))), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
-                            onClick: function () {
-                                return _this3.toggleMenu();
-                            },
-                            styles: this.props.styles,
-                            customIcon: this.props.customBurgerIcon,
-                            className: this.props.burgerButtonClassName,
-                            barClassName: this.props.burgerBarClassName
-                        })));
+                        }))));
                     }
                 }
             ]);
