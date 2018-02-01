@@ -1,15 +1,20 @@
 light-react-burger-menu
 =================
 
+It's lighter than react-burger-menu, by only including the necessary style(slide for now). The minified version goes from 38kb(react-burger-menu v2.2.0) to 24kb(light-react-burger-menu 0.3.0). Good if you want to save as much as possible.
+
+**Note:** To get the benefit of smaller size, you need [webpack tree shaking](https://webpack.js.org/guides/tree-shaking/) if you use npm and webpack in your configuration. If you just use the dist files, they are already downsized.  
+
+It supports screen readers.
+
 This is a work in progress 🔧
 
 To get a working burger menu check the original version : [negomi/react-burger-menu](https://github.com/negomi/react-burger-menu)
 
-*Using Redux? Check out [redux-burger-menu](https://github.com/negomi/redux-burger-menu) for easy integration of react-burger-menu into your project.*
-
 ## Demo & examples
 
-Live demo: [negomi.github.io/react-burger-menu](https://negomi.github.io/react-burger-menu/)
+<s>Live demo: [negomi.github.io/react-burger-menu](https://negomi.github.io/react-burger-menu/)</s>
+
 
 To build the examples locally, run:
 
@@ -44,16 +49,8 @@ The easiest way to use react-burger-menu is to install it from npm and include i
 
 You can also use the standalone build by including `dist/react-burger-menu.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
-If you're using React 0.14+:
-
 ```
-npm install react-burger-menu --save
-```
-
-If you're using React 0.13.3:
-
-```
-npm install react-burger-menu@1.1.6 --save
+npm install light-react-burger-menu --save
 ```
 
 ## Usage
@@ -61,7 +58,7 @@ npm install react-burger-menu@1.1.6 --save
 Items for the sidebar should be passed as child elements of the component using JSX.
 
 ``` javascript
-import { slide as Menu } from 'react-burger-menu'
+import { slide as Menu } from 'light-react-burger-menu'
 
 class Example extends React.Component {
   showSettings (event) {
@@ -89,7 +86,7 @@ class Example extends React.Component {
 The example above imported `slide` which renders a menu that slides in on the page when the burger icon is clicked. To use a different animation you can substitute `slide` with any of the following (check out the [demo](https://negomi.github.io/react-burger-menu/) to see the animations in action):
 
 * `slide`
-* `stack`
+* <s>`stack`
 * `elastic`
 * `bubble`
 * `push`
@@ -97,10 +94,11 @@ The example above imported `slide` which renders a menu that slides in on the pa
 * `scaleDown`
 * `scaleRotate`
 * `fallDown`
-* `reveal`
+* `reveal`</s>
 
 ### Properties
 
+<s>
 Some animations require certain other elements to be on your page:
 
 * **Page wrapper** - an element wrapping the rest of the content on your page (except elements with fixed positioning - see [the wiki](https://github.com/negomi/react-burger-menu/wiki/FAQ#i-have-a-fixed-header-but-its-scrolling-with-the-rest-of-the-page-when-i-open-the-menu) for details), placed after the menu component
@@ -142,6 +140,8 @@ Animation | `pageWrapId` | `outerContainerId`
 `scaleRotate` |  &#x2713;  |  &#x2713;
 `fallDown` |  &#x2713;  |  &#x2713;
 `reveal` |  &#x2713;  |  &#x2713;
+
+</s>
 
 #### Position
 
