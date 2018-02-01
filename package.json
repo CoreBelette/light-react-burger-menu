@@ -1,6 +1,6 @@
 {
   "name": "light-react-burger-menu",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A lightweight version of https://github.com/negomi/react-burger-menu ",
   "main": "lib/BurgerMenu.js",
   "author": "Core Belette",
