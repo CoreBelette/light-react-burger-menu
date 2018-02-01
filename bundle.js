@@ -1286,11 +1286,12 @@ var BurgerIcon = function (_Component) {
                                 style: _extends({
                                     width: '100%',
                                     height: '100%'
-                                }, this.props.styles.bmIcon)
+                                }, this.props.styles.bmIcon),
+                                'aria-hidden': 'true'
                             };
                         icon = _react2['default'].cloneElement(this.props.customIcon, extraProps);
                     } else {
-                        icon = _react2['default'].createElement('span', null, [
+                        icon = _react2['default'].createElement('span', { 'aria-hidden': 'true' }, [
                             0,
                             1,
                             2
@@ -1314,7 +1315,7 @@ var BurgerIcon = function (_Component) {
                             return _this.setState({ hover: false });
                         },
                         style: buttonStyle
-                    }, 'Open Menu'));
+                    }, this.props.altText ? this.props.altText : 'Open Menu'));
                 }
             }
         ]);
@@ -1323,11 +1324,13 @@ var BurgerIcon = function (_Component) {
 exports['default'] = BurgerIcon;
 BurgerIcon.propTypes = {
     barClassName: _propTypes2['default'].string,
+    altText: _propTypes2['default'].string,
     customIcon: _propTypes2['default'].element,
     styles: _propTypes2['default'].object
 };
 BurgerIcon.defaultProps = {
     barClassName: '',
+    altText: '',
     className: '',
     styles: {}
 };
@@ -1856,7 +1859,8 @@ exports['default'] = function (styles) {
                             styles: this.props.styles,
                             customIcon: this.props.customBurgerIcon,
                             className: this.props.burgerButtonClassName,
-                            barClassName: this.props.burgerBarClassName
+                            barClassName: this.props.burgerBarClassName,
+                            altText: this.props.burgerButtonAltText
                         })), !this.props.noOverlay && _react2['default'].createElement('div', {
                             className: ('bm-overlay ' + this.props.overlayClassName).trim(),
                             onClick: function () {
@@ -1908,6 +1912,7 @@ exports['default'] = function (styles) {
         bodyClassName: _propTypes2['default'].string,
         burgerBarClassName: _propTypes2['default'].string,
         burgerButtonClassName: _propTypes2['default'].string,
+        burgerButtonAltText: _propTypes2['default'].string,
         crossButtonClassName: _propTypes2['default'].string,
         crossClassName: _propTypes2['default'].string,
         customBurgerIcon: _propTypes2['default'].oneOfType([
@@ -1943,6 +1948,7 @@ exports['default'] = function (styles) {
         bodyClassName: '',
         burgerBarClassName: '',
         burgerButtonClassName: '',
+        burgerButtonAltText: '',
         className: '',
         crossButtonClassName: '',
         crossClassName: '',
