@@ -102,6 +102,13 @@ describe('BurgerIcon component', () => {
       expect(component.props.children[0].type).to.equal('img');
       expect(component.props.children[0].props.src).to.equal('icon.jpg');
     });
+    
+    it('should have aria-hidden to true', () => {
+      expect(component.props.children[0].props['aria-hidden']).to.equal('true');
+      const element = <img src="icon.jpg" />;
+      component = createShallowComponent(<BurgerIcon customIcon={ element } />);
+      expect(component.props.children[0].props['aria-hidden']).to.equal('true');
+    });
   });
 
   describe('button', () => {
@@ -114,7 +121,13 @@ describe('BurgerIcon component', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
       expect(button.innerHTML).to.equal('Open Menu');
     });
-
+    
+    it('can use alt descriptive text', () => {
+      component = TestUtils.renderIntoDocument(<BurgerIcon altText='Hello World'/>);
+      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      expect(button.innerHTML).to.equal('Hello World');
+    });
+    
     it('responds to hover events', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
       TestUtils.SimulateNative.mouseOver(button);

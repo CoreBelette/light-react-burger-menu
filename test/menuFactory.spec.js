@@ -223,6 +223,14 @@ describe('menuFactory', () => {
       const crossIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-cross');
       expect(crossIconBars).to.have.length(2);
     });
+
+    it('should have correct aria-hidden states when it is open/closed', () => {
+      const menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+      component.setState({isOpen: false});
+      expect(menuWrap.getAttribute('aria-hidden')).to.equal('true');
+      component.setState({isOpen: true});
+      expect(menuWrap.getAttribute('aria-hidden')).to.equal('false');
+    });
   });
 
   describe('menu element', () => {
@@ -309,6 +317,11 @@ describe('menuFactory', () => {
       const bars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-bars');
       expect(bars[0].classList.toString()).to.contain('custom-class');
     });
+    it('accepts an optional burgerButtonAltText', () => {
+      component = TestUtils.renderIntoDocument(<Menu burgerButtonAltText={ 'Hello World' } />);
+      const button = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-burger-button');
+      expect(button.querySelector('button').innerHTML).to.equal('Hello World');
+     });
   });
 
   describe('cross icon', () => {
