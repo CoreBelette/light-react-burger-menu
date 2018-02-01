@@ -194,6 +194,18 @@ export default styles => {
     render() {
       return (
         <div>
+          {this.props.customBurgerIcon !== false && (
+            <div style={this.getStyles('burgerIcon')}>
+              <BurgerIcon
+                onClick={() => this.toggleMenu()}
+                styles={this.props.styles}
+                customIcon={this.props.customBurgerIcon}
+                className={this.props.burgerButtonClassName}
+                barClassName={this.props.burgerBarClassName}
+              />
+            </div>
+          )}
+
           {!this.props.noOverlay && (
             <div
               className={`bm-overlay ${this.props.overlayClassName}`.trim()}
@@ -203,10 +215,12 @@ export default styles => {
               style={this.getStyles('overlay')}
             />
           )}
+
           <div
             id={this.props.id}
             className={`bm-menu-wrap ${this.props.className}`.trim()}
             style={this.getStyles('menuWrap')}
+            aria-hidden={this.state.isOpen ? 'false' : 'true'}
           >
             {styles.svg && (
               <div
@@ -258,17 +272,6 @@ export default styles => {
               </div>
             )}
           </div>
-          {this.props.customBurgerIcon !== false && (
-            <div style={this.getStyles('burgerIcon')}>
-              <BurgerIcon
-                onClick={() => this.toggleMenu()}
-                styles={this.props.styles}
-                customIcon={this.props.customBurgerIcon}
-                className={this.props.burgerButtonClassName}
-                barClassName={this.props.burgerBarClassName}
-              />
-            </div>
-          )}
         </div>
       );
     }
