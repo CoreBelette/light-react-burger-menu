@@ -202,6 +202,7 @@ export default styles => {
                 customIcon={this.props.customBurgerIcon}
                 className={this.props.burgerButtonClassName}
                 barClassName={this.props.burgerBarClassName}
+                altText={this.props.burgerButtonAltText}
               />
             </div>
           )}
@@ -281,6 +282,7 @@ export default styles => {
     bodyClassName: PropTypes.string,
     burgerBarClassName: PropTypes.string,
     burgerButtonClassName: PropTypes.string,
+    burgerButtonAltText: PropTypes.string,
     crossButtonClassName: PropTypes.string,
     crossClassName: PropTypes.string,
     customBurgerIcon: PropTypes.oneOfType([
@@ -317,6 +319,7 @@ export default styles => {
     bodyClassName: '',
     burgerBarClassName: '',
     burgerButtonClassName: '',
+    burgerButtonAltText: '',
     className: '',
     crossButtonClassName: '',
     crossClassName: '',

@@ -44,12 +44,13 @@ export default class BurgerIcon extends Component {
         style: {
           ...{ width: '100%', height: '100%' },
           ...this.props.styles.bmIcon
-        }
+        },
+        'aria-hidden': 'true'
       };
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <span>
+        <span aria-hidden="true">
           {[0, 1, 2].map(bar => (
             <span
               key={bar}
@@ -76,7 +77,7 @@ export default class BurgerIcon extends Component {
           onMouseOut={() => this.setState({ hover: false })}
           style={buttonStyle}
         >
-          Open Menu
+          {this.props.altText ? this.props.altText : 'Open Menu'}
         </button>
       </div>
     );
@@ -85,12 +86,14 @@ export default class BurgerIcon extends Component {
 
 BurgerIcon.propTypes = {
   barClassName: PropTypes.string,
+  altText: PropTypes.string,
   customIcon: PropTypes.element,
   styles: PropTypes.object
 };
 
 BurgerIcon.defaultProps = {
   barClassName: '',
+  altText: '',
   className: '',
   styles: {}
 };
