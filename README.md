@@ -3,6 +3,8 @@ light-react-burger-menu
 
 It's lighter than react-burger-menu, by only including the necessary style(slide for now). The minified version goes from 38kb(react-burger-menu v2.2.0) to 24kb(light-react-burger-menu 0.3.0). Good if you want to save as much as possible.
 
+**Note:** To get the benefit of smaller size, you need [webpack tree shaking](https://webpack.js.org/guides/tree-shaking/) if you use npm and webpack in your configuration. If you just use the dist files, they are already downsized.  
+
 It supports screen readers.
 
 This is a work in progress 🔧
